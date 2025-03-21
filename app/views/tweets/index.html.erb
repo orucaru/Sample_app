@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>簡単なツイートアプリ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .tweet-box {
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .tweet-box textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    .tweet-box button {
+      padding: 10px 20px;
+      background-color: #1da1f2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .tweet-box button:hover {
+      background-color: #1a91da;
+    }
+    .tweets {
+      list-style: none;
+      padding: 0;
+    }
+    .tweet {
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ツイートを投稿しよう！</h1>
+
+    <!-- ツイート投稿フォーム -->
+    <div class="tweet-box">
+      <%= form_with model: Tweet.new, url: tweets_path, method: :post do |form| %>
+        <%= form.text_area :content, placeholder: "ツイートを入力...", rows: 4 %><br>
+        <%= form.submit "ツイート", class: "button" %>
+      <% end %>
+    </div>
+
+    <h2>最新のツイート</h2>
+    <ul class="tweets">
+      <% @tweets.each do |tweet| %>
+        <li class="tweet">
+          <%= tweet.content %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</body>
+</html>
